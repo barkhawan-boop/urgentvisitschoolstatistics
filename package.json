@@ -1,0 +1,22 @@
+{
+  "name": "urgent-school-statistics",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && wrangler dev",
+    "test": "node --test tests/*.test.mjs",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "db:remote": "wrangler d1 migrations apply DB --remote",
+    "deploy": "npm run build && wrangler deploy",
+    "check": "npm test && npm run build && wrangler deploy --dry-run"
+  },
+  "dependencies": {
+    "fflate": "0.8.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "wrangler": "^4.0.0"
+  }
+}
