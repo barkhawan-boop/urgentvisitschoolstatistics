@@ -41,3 +41,4 @@ test('cell insertion remains ordered and untrusted text cannot become a formula'
  const changed=patchSheetXml(xml,{B1:'=HYPERLINK("bad")',C1:'007'});
  assert.ok(changed.indexOf('r="B1"')<changed.indexOf('r="C1"'));assert.ok(!changed.includes('<f>'));assert.match(changed,/s="3" t="inlineStr"/);
 });
+
