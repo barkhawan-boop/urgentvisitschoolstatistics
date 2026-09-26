@@ -115,7 +115,7 @@ function renderSheet(){
       const section=s.cells.filter(c=>c.col===2&&c.cs>1&&c.row<row).at(-1)?.text||'';
       const panel=el('section',{class:'panel count-panel'},el('h3',{},section),el('div',{class:'section-heading'},el('h3',{},label),button('Calculate row totals',()=>calculateCounts(s,row))),el('div',{class:'fields'},cells.map(c=>field(s,c))));form.append(panel);
     }else{
-      const item=el('details',{class:'entry',...(i===0?{open:''}:{})},el('summary',{},el('span',{class:'row-index'},String(i+1).padStart(2,'0')),el('span',{class:'row-title'},''),el('span',{class:'row-count',dir:'ltr'},'')),el('div',{class:'fields'},cells.map(c=>field(s,c))));
+      const item=el('details',{class:'entry',open:''},el('summary',{},el('span',{class:'row-index'},String(i+1).padStart(2,'0')),el('span',{class:'row-title'},''),el('span',{class:'row-count',dir:'ltr'},'')),el('div',{class:'fields'},cells.map(c=>field(s,c))));
       if(s.id==='3'){const subject=s.cells.find(c=>c.col===2&&c.row===row)?.text||(row===24?'كۆی گشتی · Total':'');item.querySelector('.row-title').textContent=subject;item.querySelector('.row-count').textContent=cells.filter(c=>cellValue(s,c,r)!=='').length+' / '+cells.length;}
       else updateRowTitle(item,s,row);
       form.append(item);
