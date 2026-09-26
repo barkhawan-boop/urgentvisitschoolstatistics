@@ -43,10 +43,10 @@ function identityForm(){
 }
 function home(){
   active=null;clearTimeout(timer);
-  const heading=el('div',{class:'page-heading'},el('div',{},el('p',{class:'eyebrow'},'UTVT / SCHOOL RECORDS'),el('h1',{},'ئاماری ساڵانەی قوتابخانە'),el('p',{class:'muted'},'Yearly school quick check · Eight forms, one school record.')));
-  const create=el('section',{class:'panel'},el('h2',{},'تۆمارێکی نوێ · New school record'),identityForm());
+  const heading=el('div',{class:'page-heading'},el('div',{},el('h1',{},'ئاماری ساڵانەی قوتابخانە')));
+  const create=el('section',{class:'panel'},identityForm());
   const list=el('section',{class:'panel record-list'},el('div',{class:'section-heading'},el('h2',{},'تۆمارە پاشەکەوتکراوەکان · Saved records'),el('span',{class:'count'},String(records.length))));
-  if(!records.length)list.append(el('p',{class:'empty'},'هێشتا هیچ تۆمارێک نییە. Create a record above or restore one below.'));
+  if(!records.length)list.append(el('p',{class:'empty'},'هێشتا هیچ تۆمارێک نییە. Create a record above.'));
   for(const r of records){const card=el('article',{class:'record'},el('div',{},el('h3',{},r.name),el('span',{class:'muted',dir:'ltr'},r.year+' · '+r.completed.length+'/8 steps saved'),el('p',{class:'record-status'},stateText(r))),button('بەردەوامبوون · Continue',()=>openRecord(r,Math.min(7,r.completed.length)),'primary'));list.append(card);}
   const recoveryInput=el('input',{dir:'ltr',placeholder:'School recovery code','aria-label':'School recovery code',autocomplete:'off'});
   const restore=el('section',{class:'panel'},el('h2',{},'گەڕاندنەوە · Resume on another device'),el('p',{class:'muted'},'Paste the private recovery code, or import a downloaded backup.'),el('div',{class:'restore-line'},recoveryInput,button('Restore from cloud',()=>restoreCloud(recoveryInput.value))));
@@ -58,7 +58,7 @@ function home(){
     if(records.some(x=>x.id===r.id))throw Error('This record is already on this device. Export its current backup before restoring a different copy.');
     const restored={...valid,id:r.id,token:r.token,revision:Number.isInteger(r.revision)?r.revision:0,dirty:true};records.push(restored);persist();openRecord(restored);
   }catch(e){toast(e.message,true);}});restore.append(el('label',{class:'upload'},'Import private backup (.json)',upload));
-  app.replaceChildren(heading,el('div',{class:'home-grid'},el('div',{},create,list),restore));
+  app.replaceChildren(heading,el('div',{class:'home-grid'},el('div',{},create,list))); 
   if(storageError)toast('Browser storage could not be read. Existing data has not been overwritten.',true);
 }
 async function restoreCloud(code,force=false){
