@@ -97,7 +97,7 @@ function renderSheet(){
   const r=active,s=workbook.sheets[sheetIndex];if(!r)return home();
   const nav=el('nav',{class:'steps','aria-label':'Worksheet pages'});
   workbook.sheets.forEach((sheet,i)=>nav.append(button('',()=>goSheet(i),'step '+(i===sheetIndex?'active':'')).appendChild(el('span',{},el('b',{class:'step-num'},r.completed.includes(sheet.id)?'✓':sheet.id),el('span',{},sheet.name,el('small',{},english[i])))).parentElement));
-  const heading=el('div',{class:'page-heading compact'},el('div',{},el('p',{class:'eyebrow',dir:'ltr'},r.year+' / '+String(sheetIndex+1).padStart(2,'0')+' OF 08'),el('h1',{},s.name),el('p',{class:'muted'},english[sheetIndex]+' · '+r.name)),el('div',{class:'heading-actions'},button('کۆدی گەڕاندنەوە · Recovery',()=>showRecovery(r),'quiet'),button('چاپ و Excel · Print & export',()=>exportDialog(r))));
+  const heading=el('div',{class:'page-heading compact'},el('div',{},el('p',{class:'eyebrow',dir:'ltr'},r.year+' / '+String(sheetIndex+1).padStart(2,'0')+' OF 08'),el('h1',{},s.name),el('p',{class:'muted'},english[sheetIndex]+' · '+r.name)),el('div',{class:'heading-actions'},button('چاپ و Excel · Print & export',()=>exportDialog(r))));
   const tools=el('div',{class:'save-bar'},el('span',{id:'save-state',role:'status'},stateText(r)),button('پاشەکەوتکردن · Save now',()=>saveStep(false),'primary'));
   const form=el('form',{id:'sheet-form',novalidate:''});form.addEventListener('submit',e=>e.preventDefault());
   const headers=s.cells.filter(c=>c.header);
